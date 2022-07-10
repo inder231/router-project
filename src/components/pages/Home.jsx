@@ -3,10 +3,8 @@ import { Appcontext } from "../context/Appcontext";
 import {Themecontext} from "../context/Themecontext"
 import styles from '../styles/home.module.css';
 const Home = () => {
-  const [data] = useContext(Appcontext);
+  const {data} = useContext(Appcontext);
   const {mode} = useContext(Themecontext);
-  
-  console.log(mode);
   return (
     <div className={mode==='light'?styles.light:styles.dark} >
       <h4>Here are some products...</h4>

@@ -17,27 +17,28 @@ import {
   PopoverCloseButton,
   Portal,
 } from "@chakra-ui/react";
-import styles from '../styles/navbar.module.css'
+import styles from "../styles/navbar.module.css";
 import React from "react";
-import { CopyIcon} from "@chakra-ui/icons";
+import { CopyIcon } from "@chakra-ui/icons";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import Themecontext from "../context/Themecontext";
-
+import { Appcontext } from "../context/Appcontext";
 
 const Navbar = () => {
   const { mode, toggleMode } = useContext(Themecontext);
+  const {productCartCount} = useContext(Appcontext);
   return (
-    <Box className={mode==='light'?styles.light:styles.dark}
+    <Box
+      className={mode === "light" ? styles.light : styles.dark}
       display="flex"
       justifyContent="space-evenly"
       height="70px"
       alignItems="center"
-      background="white"
       fontSize="20px"
       fontWeight="bold"
       position="relative"
-      borderBottom="1px solid gray"
+      borderBottom="1px solid"
     >
       <Box flex="1">
         <UnorderedList
@@ -76,21 +77,48 @@ const Navbar = () => {
             <NavLink to="/contact">Contact</NavLink>
           </ListItem>
           <ListItem>
-            <NavLink to="/cart">
-              <IconButton aria-label="Cart" border="3px solid" >
-                <Image width="40px" height="40px" borderRadius="5px" src="https://image.shutterstock.com/image-vector/ecommerce-shopping-cart-icon-flat-600w-1934607935.jpg" />
-              </IconButton>
+            <Button
+              onClick={() => toggleMode()}
+              style={
+                mode === "light"
+                  ? { background: "black", color: "white" }
+                  : { background: "white", color: "black" }
+              }
+            >
+              Mode:{mode}
+            </Button>
+          </ListItem>
+          <ListItem>
+            <NavLink to="/products">
+              <Button>Products</Button>
             </NavLink>
           </ListItem>
           <ListItem>
-            <Button onClick={() => toggleMode()} style={mode==='light'?{background:'black',color:'white'}:{background:'white',color:'black'}} >Mode:{mode}</Button>
+            <NavLink to="/cart">
+              <IconButton
+                className={styles.cartItem}
+                aria-label="Cart"
+                border="3px solid"
+                value={productCartCount}
+              >
+                <Image
+                  width="40px"
+                  height="40px"
+                  borderRadius="5px"
+                  src="https://image.shutterstock.com/image-vector/ecommerce-shopping-cart-icon-flat-600w-1934607935.jpg"
+                />
+              </IconButton>
+            </NavLink>
           </ListItem>
         </UnorderedList>
       </Box>
-      <Box>
-        <Popover  >
+      <Box
+        className={styles.sale}
+        bgGradient="linear(to-r, green.200, pink.500)"
+      >
+        <Popover>
           <PopoverTrigger>
-            <Button bgColor='lightpink' >Big sale !!</Button>
+            <Button bgColor="white">Big sale !!</Button>
           </PopoverTrigger>
           <Portal>
             <PopoverContent>
