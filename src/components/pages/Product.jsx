@@ -2,7 +2,7 @@ import { Box, Button, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+import { CircularProgress } from "@chakra-ui/react";
 import { Appcontext } from "../context/Appcontext";
 
 export default function Product() {
@@ -26,7 +26,7 @@ export default function Product() {
         setIsLoading(false);
         setError(true);
       });
-  }, []);
+  }, [params.product_id]);
   if (error) {
     return (
       <Box>

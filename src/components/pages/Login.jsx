@@ -7,12 +7,12 @@ import {
   Box,
   Text,
   Button,
-  Form,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Appcontext } from "../context/Appcontext";
 export default function Login() {
-  const { state, dispatch } = useContext(Appcontext);
+  const navigate = useNavigate();
+  const { dispatch } = useContext(Appcontext);
   const [form, setForm] = useState({ email: "", password: "" });
   const handleForm = (e) => {
     const { name, value } = e.target;
@@ -24,6 +24,9 @@ export default function Login() {
         onSubmit={(e) => {
           e.preventDefault();
           dispatch({type:"LOGIN",payload:form})
+          alert("login success");
+          navigate("/products");
+
         }}
       >
         <FormControl w="300px" m="auto">
