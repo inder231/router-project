@@ -14,9 +14,9 @@ import axios from "axios";
 import { useContext } from "react";
 import { Appcontext } from "../context/Appcontext";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 export default function Products() {
   const { data } = useContext(Appcontext);
-  // const axios = require("axios");
   const [clothing, setClothing] = useState([]);
   const [food,setFood] = useState(true);
   const [clothes,setClothes] = useState(false);
@@ -32,6 +32,9 @@ export default function Products() {
       })
       .catch((err) => console.log("error", err));
   };
+  useEffect(()=>{
+    getClothing("products/category/jewelery");
+  },[])
   return (
     <Box>
       <Breadcrumb>
@@ -72,7 +75,7 @@ export default function Products() {
                 borderRadius="10px"
               >
                 <Button position="absolute" top="0" left="0" bgColor="orange">
-                  <Link to={`/products/${ele.id}`}>Order Now</Link>
+                  <Link to={`/products/${ele.id}`} >Order Now</Link>
                 </Button>
                 <Box
                   marginTop="35px"
